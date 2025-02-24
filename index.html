@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Verificación de Certificado</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            margin: 50px;
+        }
+        input, button {
+            padding: 10px;
+            font-size: 16px;
+            margin: 10px;
+        }
+        #resultado {
+            margin-top: 20px;
+            padding: 10px;
+            border: 1px solid #ccc;
+            display: inline-block;
+            text-align: left;
+        }
+    </style>
+</head>
+<body>
+    <h2>Verificación de Certificado</h2>
+    <input type="text" id="codigoCertificado" placeholder="Ingrese el código" />
+    <button onclick="verificarCertificado()">Verificar</button>
+    <div id="resultado"></div>
+
+    <script>
+        function verificarCertificado() {
+            var codigo = document.getElementById("codigoCertificado").value;
+            if (!codigo) {
+                alert("Por favor, ingrese un código de certificado.");
+                return;
+            }
+
+            var url = "https://script.google.com/macros/s/AKfycbxljtuzlZ5tdoZv5tZXrER3x_Oe8VBWbuWwoCiX31leauc-VDvsuTJZZcxSsbfjHy4x/exec" + "?codigo=" + encodeURIComponent(codigo);
+
+            fetch(url)
+                .then(response => response.json())
+                .then(data => {
+                    var resultadoDiv = document.getElementById("resultado");
+                    if (data.Error) {
+                        resultadoDiv.innerHTML = "<strong>Error:</strong> " + data.Error;
+                    } else {
+                        resultadoDiv.innerHTML = `
+                            <p><strong>Código:</strong> ${data.Código}</p>
+                            <p><strong>Nombres:</strong> ${data.Nombres}</p>
+                            <p><strong>Apellidos:</strong> ${data.Apellidos}</p>
+                            <p><strong>Curso:</strong> ${data.Curso}</p>
+                            <p><strong>Fecha Inicio:</strong> ${data["Fecha Inicio"]}</p>
+                            <p><strong>Fecha Fin:</strong> ${data["Fecha Fin"]}</p>
+                            <p><strong>Horas:</strong> ${data.Horas}</p>
+                            <p><strong>Condición:</strong> ${data.Condición}</p>
+                        `;
+                    }
+                })
+                .catch(error => {
+                    document.getElementById("resultado").innerHTML = "<strong>Error al conectar con el servidor.</strong>";
+                    console.error("Error:", error);
+                });
+        }
+    </script>
+</body>
+</html>
