@@ -46,7 +46,7 @@
                 return;
             }
 
-            var url = "https://script.google.com/macros/s/AKfycbyTgW01-NB4aBijF2-IiLwVTOa8xTE5rG8Evy6Jl9RYA30xtI4OYCZgm4UarONYYc_t/exec" + "?codigo=" + encodeURIComponent(codigo);
+            var url = "https://script.google.com/macros/s/AKfycbwtkCQtAfYPYOTxsYA_8C5Gb_ISVthUTpxXOuR-invhJs1b8B_fdUv-Awr37VJ-_m1u/exec" + "?codigo=" + encodeURIComponent(codigo);
 
             fetch(url)
                 .then(response => response.json())
@@ -60,7 +60,7 @@
                             <p><strong>Nombres:</strong> ${data.Nombres}</p>
                             <p><strong>Apellidos:</strong> ${data.Apellidos}</p>
                             <p><strong>Documento:</strong> ${data.Documento}</p>
-                            <p><strong>Descripción:</strong> ${data.Curso}</p>
+                            <p><strong>Descripción:</strong> ${data.Descripción}</p>
                             <p><strong>Fecha Inicio:</strong> ${data["Fecha Inicio"]}</p>
                             <p><strong>Fecha Fin:</strong> ${data["Fecha Fin"]}</p>
                             <p><strong>Horas:</strong> ${data.Horas}</p>
